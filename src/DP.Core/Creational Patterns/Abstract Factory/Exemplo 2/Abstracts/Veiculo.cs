@@ -12,15 +12,14 @@ namespace DP.Core.Creational_Patterns.Abstract_Factory.Exemplo_2.Abstracts
     {
         public string Modelo{ get; set; }
         public Porte Porte { get; set; }
-        public string Teste { get; set; }
         public Veiculo(string modelo)
         {
             Modelo = modelo;
         }
         public Veiculo(string modelo, Porte porte)
         {
+            Modelo = modelo;
             Console.WriteLine($"Veiculo: {modelo} - Porte: {porte.GetDescription()}");
-
         }
     }
 

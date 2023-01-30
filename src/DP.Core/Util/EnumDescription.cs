@@ -21,7 +21,7 @@ namespace DP.Core.Util
 
             //Tries to find a DescriptionAttribute for a potential friendly name
             //for the enum
-            MemberInfo[] memberInfo = type.GetMember(enumerationValue.ToString());
+            MemberInfo[] memberInfo = type.GetMember(enumerationValue.ToString()!);
             if (memberInfo != null && memberInfo.Length > 0)
             {
                 object[] attrs = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
