@@ -1,4 +1,9 @@
-﻿using System;
+﻿using DP.App.Console.Services.Factory_Method;
+using DP.Core.Creational_Patterns.Builder.Builders;
+using DP.Core.Creational_Patterns.Builder.Builders.Base;
+using DP.Core.Creational_Patterns.Builder.Director;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +13,21 @@ namespace DP.App.Console.Services
 {
     public static class Menu 
     {
-        public static void Menus()
+        public static void Menus(IServiceProvider serviceProvider)
         {
             WriteLine("###### Selecione uma opção #####");
-            WriteLine("Creational Patterns");
-            WriteLine(new string[] { "1 - Abstract Factory", "2 - Factory Method", "3 - Singleton" });
+
+
+            MenuCreationalPatterns();
+
+
             System.Console.Write("Selecione uma opção: ");
             WriteLine("Exemplo: Opção: 1", 1, ConsoleColor.Green);
             var escolha = System.Console.ReadLine();
-            HandleOpcao(escolha!);
+            HandleOpcao(escolha!, serviceProvider);
         }
 
-        public static void WriteLine(string texto = "", int linhas = 1, System.ConsoleColor corTexto = System.ConsoleColor.White)
+        public static void WriteLine(string texto, int linhas = 1, System.ConsoleColor corTexto = System.ConsoleColor.White)
         {
             for (int i = 0; i < linhas; i++)
             {
@@ -39,7 +47,7 @@ namespace DP.App.Console.Services
                 }
             }
         }
-        private static void HandleOpcao(string escolha)
+        private static void HandleOpcao(string escolha, IServiceProvider service)
         {
             switch (escolha.Trim())
             {
@@ -47,12 +55,26 @@ namespace DP.App.Console.Services
                     VeiculoCreator.HandleVeiculo();
                     break;
                 case "2":
-                    MobiliaCreator.HandleMobilia();
+                    HandleProcessoTransacao.SimularProcessoTransacao();
+                    break;
+                case "3":
+                    var carroBuilder = service.GetService<CarroEsportivoBuilder>();
+                    var carroDirector = service.GetService<CarroBuilderDirector>();
+                    carroDirector.FabricarCarro(carroBuilder, "Jaguar");
+                    var carro = carroBuilder.BuscarCarro();
+                    WriteLine(carro.Modelo);
                     break;
                 default:
                     System.Console.WriteLine("Opção inválida!");
                     break;
             }
+        }
+
+        private static void MenuCreationalPatterns()
+        {
+            
+            WriteLine("Creational Patterns");
+            WriteLine(new string[] { "1 - Abstract Factory", "2 - Factory Method", "3 - Builder" });
         }
     }
 }

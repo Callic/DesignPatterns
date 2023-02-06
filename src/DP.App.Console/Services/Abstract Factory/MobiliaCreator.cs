@@ -5,6 +5,7 @@ namespace DP.App.Console.Services
 {
     public static class MobiliaCreator
     {
+        
         public static void HandleMobilia()
         {
             System.Console.WriteLine("######  Mobilia Vitoriana ######");

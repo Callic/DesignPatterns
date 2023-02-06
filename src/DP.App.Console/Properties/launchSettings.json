@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DP.App.Console": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
