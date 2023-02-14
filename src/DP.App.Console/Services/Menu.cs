@@ -72,7 +72,7 @@ namespace DP.App.Console.Services
                     break;
                 case "5":
                     var adapter = service.GetService<IAdapter<AdapterEx1>>();
-                    adapter.Executar();
+                    adapter!.Executar();
                     break;
                 default:
                     System.Console.WriteLine("Opção inválida!");
