@@ -2,6 +2,9 @@
 using DP.Core.Creational_Patterns.Builder.Builders;
 using DP.Core.Creational_Patterns.Builder.Builders.Base;
 using DP.Core.Creational_Patterns.Builder.Director;
+using DP.Core.Creational_Patterns.Singleton.Exemplo_1;
+using DP.Core.Structural_Patterns.Adapter;
+using DP.Core.Structural_Patterns.Adapter.Exemplo_1;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace DP.App.Console.Services
 {
-    public static class Menu 
+    public static class Menu
     {
         public static void Menus(IServiceProvider serviceProvider)
         {
             WriteLine("###### Selecione uma opção #####");
 
 
-            MenuCreationalPatterns();
+            MenuManage();
 
 
             System.Console.Write("Selecione uma opção: ");
@@ -64,17 +67,35 @@ namespace DP.App.Console.Services
                     var carro = carroBuilder.BuscarCarro();
                     WriteLine(carro.Modelo);
                     break;
+                case "4":
+                    SingletonEx1.Executar();
+                    break;
+                case "5":
+                    var adapter = service.GetService<IAdapter<AdapterEx1>>();
+                    adapter.Executar();
+                    break;
                 default:
                     System.Console.WriteLine("Opção inválida!");
                     break;
             }
         }
 
+        private static void MenuManage()
+        {
+            MenuCreationalPatterns();
+            MenuStructuralPatterns();
+        }
+
         private static void MenuCreationalPatterns()
         {
-            
+
             WriteLine("Creational Patterns");
-            WriteLine(new string[] { "1 - Abstract Factory", "2 - Factory Method", "3 - Builder" });
+            WriteLine(new string[] { "1 - Abstract Factory", "2 - Factory Method", "3 - Builder", "4 - Singleton" });
+        }
+        private static void MenuStructuralPatterns()
+        {
+            WriteLine("Structural Patterns");
+            WriteLine(new string[] { "5 - Adapter" });
         }
     }
 }
