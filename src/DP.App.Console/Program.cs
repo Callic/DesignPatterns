@@ -1,8 +1,15 @@
 ﻿using DP.App.Console.Configuration.DI;
 using DP.App.Console.Services;
+using Microsoft.Extensions.Configuration;
 
 
-var serviceProvider = DependencyInjectionConfiguration.BuscarServiceProvider();
+IConfiguration configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+var serviceProvider = DependencyInjectionConfiguration.BuildServiceProvider(configuration);
+
+
 while (true)
 {
     Console.WriteLine("Teste imagem docker");
