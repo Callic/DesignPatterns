@@ -1,11 +1,7 @@
 ﻿using DP.Core.Structural_Patterns.Facade.Exemplo_1.Clients;
 using DP.Core.Structural_Patterns.Facade.Exemplo_1.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DP.Core.Structural_Patterns.Facade.Exemplo_1
 {

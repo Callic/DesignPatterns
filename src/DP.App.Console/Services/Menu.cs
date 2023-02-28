@@ -1,4 +1,6 @@
 ﻿using DP.App.Console.Services.Factory_Method;
+using DP.Core.Behavioral_Patterns.Command;
+using DP.Core.Behavioral_Patterns.Strategy;
 using DP.Core.Creational_Patterns.Builder.Builders;
 using DP.Core.Creational_Patterns.Builder.Director;
 using DP.Core.Creational_Patterns.Singleton.Exemplo_1;
@@ -13,18 +15,19 @@ namespace DP.App.Console.Services
 {
     public static class Menu
     {
-        public static void Menus(IServiceProvider serviceProvider)
+        public static string Menus(IServiceProvider serviceProvider)
         {
-            WriteLine("###### Selecione uma opção #####");
+            WriteLine("Para sair, digite 0", 1, ConsoleColor.Red);
 
+            WriteLine("###### Selecione uma opção #####");
 
             MenuManage();
 
-
             System.Console.Write("Selecione uma opção: ");
-            WriteLine("Exemplo: Opção: 1", 1, ConsoleColor.Green);
             var escolha = System.Console.ReadLine();
-            HandleOpcao(escolha!, serviceProvider);
+            if(escolha is not "0")
+                HandleOpcao(escolha!, serviceProvider);
+            return escolha;
         }
 
 
@@ -60,6 +63,14 @@ namespace DP.App.Console.Services
                     var composite = service.GetService<ExecucaoComposite>();
                     composite!.Executar();
                     break;
+                case "8":
+                    var commander = service.GetService<ExecucaoCommand>();
+                    commander!.Executar();
+                    break;
+                case "9":
+                    var strategy = service.GetService<ExecucaoStrategy>();
+                    strategy!.Executar();
+                    break;
                 default:
                     System.Console.WriteLine("Opção inválida!");
                     break;
@@ -70,6 +81,7 @@ namespace DP.App.Console.Services
         {
             CreationalPatternsMenu();
             StructuralPatternsMenu();
+            BehaviorPatternsMenu();
         }
 
         private static void CreationalPatternsMenu()
@@ -82,6 +94,11 @@ namespace DP.App.Console.Services
         {
             WriteLine("> Structural Patterns", 1, ConsoleColor.Cyan);
             WriteLine(new string[] { "5 - Adapter", "6 - Facade", "7 - Composite" });
+        }
+        private static void BehaviorPatternsMenu()
+        {
+            WriteLine("> Behavior Patterns", 1, ConsoleColor.Cyan);
+            WriteLine(new string[] { "8 - Command", "9 - Strategy" });
         }
         public static void WriteLine(string texto, int linhas = 1, System.ConsoleColor corTexto = System.ConsoleColor.White)
         {

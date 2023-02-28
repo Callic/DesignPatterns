@@ -1,8 +1,9 @@
-﻿using DP.Core.Structural_Patterns.Facade.Exemplo_1.Models;
+﻿using DP.Core.Structural_Patterns.Facade.Exemplo_1.Interfaces;
+using DP.Core.Structural_Patterns.Facade.Exemplo_1.Models;
 
 namespace DP.Core.Structural_Patterns.Facade.Exemplo_1
 {
-    public class PagamentoCartaoCreditoService : IPagamento
+    public class PagamentoCartaoCreditoService : IPagamentoCartaoCreditoService
     {
 
         private readonly IPagamentoCartaoCreditoFacade _pagamentoCartaoCreditoFacade;
@@ -15,11 +16,11 @@ namespace DP.Core.Structural_Patterns.Facade.Exemplo_1
         {
             if(!_pagamentoCartaoCreditoFacade.RealizarPagamento(pedido, pagamento))
             {
-                pagamento.Status = "Pagamento não aprovado";
+                pagamento.Status = "Pagamento não aprovado via cartão de crédito";
                 return pagamento;
             }
 
-            pagamento.Status = "Pagamento Aprovado";
+            pagamento.Status = "Pagamento Aprovado via cartão de crédito";
             return pagamento;
         }
     }

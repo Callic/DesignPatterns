@@ -9,12 +9,16 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 var serviceProvider = DependencyInjectionConfiguration.BuildServiceProvider(configuration);
 
-
-while (true)
+string opcao = "";
+do
 {
     Console.WriteLine("Teste imagem docker");
-    Menu.Menus(serviceProvider);
-    Console.WriteLine("Pressione qualquer tecla!");
-    Console.ReadKey();
-    Console.Clear();
-}
+    opcao = Menu.Menus(serviceProvider);
+    if(opcao is not "0")
+    {
+        Console.WriteLine("Pressione qualquer tecla para reiniciar os exemplos!");
+        Console.ReadKey();
+        Console.Clear();
+    }
+} while (opcao != "0");
+
